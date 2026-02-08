@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   publisher: "VoidPix",
   robots: "index, follow",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    icon: "/voidpix/icon.svg",
+    shortcut: "/voidpix/icon.svg",
+    apple: "/voidpix/icon.svg",
   },
-  manifest: "/manifest.json",
+  manifest: "/voidpix/manifest.json",
   openGraph: {
     type: "website",
     locale: "zh_CN",
@@ -44,7 +44,12 @@ export const metadata: Metadata = {
     title: "VoidPix - 免费在线图片处理工具",
     description: "支持格式转换、图片压缩、添加水印、去除水印等功能，所有处理均在本地完成，保护您的隐私安全。",
   },
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
