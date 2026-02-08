@@ -10,9 +10,11 @@ const nextConfig: NextConfig = {
   },
   // 路由配置
   trailingSlash: true,
-  // GitHub Pages 部署到子路径时的配置
-  basePath: '/voidpix',
-  assetPrefix: '/voidpix',
+  // GitHub Pages 部署到子路径时的配置（仅在构建时启用）
+  ...(process.env.NODE_ENV === 'production' ? {
+    basePath: '/voidpix',
+    assetPrefix: '/voidpix',
+  } : {}),
 };
 
 export default nextConfig;

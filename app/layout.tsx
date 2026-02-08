@@ -15,6 +15,9 @@ const notoSansSC = Noto_Sans_SC({
   display: "swap",
 });
 
+// 根据环境确定 basePath
+const basePath = process.env.NODE_ENV === 'production' ? '/voidpix' : '';
+
 export const metadata: Metadata = {
   title: {
     default: "VoidPix - 免费在线图片处理工具",
@@ -27,11 +30,11 @@ export const metadata: Metadata = {
   publisher: "VoidPix",
   robots: "index, follow",
   icons: {
-    icon: "/voidpix/icon.svg",
-    shortcut: "/voidpix/icon.svg",
-    apple: "/voidpix/icon.svg",
+    icon: `${basePath}/icon.svg`,
+    shortcut: `${basePath}/icon.svg`,
+    apple: `${basePath}/icon.svg`,
   },
-  manifest: "/voidpix/manifest.json",
+  manifest: `${basePath}/manifest.json`,
   openGraph: {
     type: "website",
     locale: "zh_CN",
