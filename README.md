@@ -1,36 +1,232 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VoidPix
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+**完全免费的在线图片处理工具**
+
+[![Next.js](https://img.shields.io/badge/Next.js-16.1-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-blue?style=flat&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
+
+[在线体验](#) · [功能特性](#功能特性) · [快速开始](#快速开始) · [技术栈](#技术栈)
+
+</div>
+
+## ✨ 简介
+
+VoidPix 是一款完全免费的在线图片处理工具，所有图片处理均在您的浏览器本地完成，我们不会上传或存储您的任何图片，确保您的隐私安全。
+
+### 🌟 核心特点
+
+- 🔒 **隐私安全** - 所有处理均在本地完成，图片不上传服务器
+- ⚡ **即时处理** - 基于浏览器 Canvas API，处理速度快
+- 💰 **完全免费** - 无需注册，无限制使用
+- 📱 **响应式设计** - 支持桌面端和移动端
+- 🎨 **现代化 UI** - 采用 shadcn/ui 组件库，界面美观易用
+
+## 🎯 功能特性
+
+### 单张图片处理
+
+| 功能 | 描述 |
+|------|------|
+| **格式转换** | 支持 JPG、PNG、WEBP 等格式互转 |
+| **图片压缩** | 智能压缩算法，减小文件大小同时保持画质 |
+| **添加水印** | 支持文字和图片水印，提供多种预设和高级选项 |
+| **去除水印** | 提供画笔、矩形、椭圆、多边形等工具选择水印区域 |
+
+### 批量处理
+
+- **批量格式转换** - 一次性将多张图片转换为目标格式
+- **批量压缩** - 统一压缩多张图片，打包下载
+
+### 水印功能亮点
+
+- **快速预设** - 低调、醒目、专业、平铺淡雅、对角线等预设风格
+- **文字样式** - 支持字体选择、颜色、描边、阴影效果
+- **位置控制** - 9宫格位置 + 平铺模式
+- **高级选项** - 旋转角度、字间距、混合模式等
+- **平铺模式** - 全图平铺水印，支持密度和倾斜角度调节
+
+## 🚀 快速开始
+
+### 环境要求
+
+- Node.js >= 18.17.0
+- npm >= 9.0.0
+
+### 安装依赖
+
+```bash
+# 克隆项目
+git clone https://github.com/your-username/voidpix.git
+cd voidpix
+
+# 安装依赖
+npm install
+```
+
+### 启动开发服务器
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+访问 [http://localhost:3000](http://localhost:3000) 查看应用。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 构建生产版本
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 🛠️ 技术栈
 
-To learn more about Next.js, take a look at the following resources:
+### 核心框架
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js 16** - React 全栈框架，支持 App Router
+- **React 19** - 用户界面库
+- **TypeScript** - 类型安全的 JavaScript
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### UI 组件
 
-## Deploy on Vercel
+- **shadcn/ui** - 基于 Radix UI 的组件库
+- **Tailwind CSS v4** - 原子化 CSS 框架
+- **Lucide React** - 精美的图标库
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 工具库
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **JSZip** - ZIP 文件打包下载
+- **Canvas API** - 图片处理核心
+
+### 字体
+
+- **Inter** - 英文字体
+- **Noto Sans SC** - 中文字体
+
+## 📁 项目结构
+
+```
+voidpix/
+├── app/                      # Next.js App Router
+│   ├── layout.tsx           # 根布局，包含元数据和字体配置
+│   ├── page.tsx             # 首页
+│   ├── globals.css          # 全局样式
+│   ├── icon.svg             # 应用图标
+│   └── manifest.json        # PWA 配置
+├── components/              # React 组件
+│   ├── ui/                  # shadcn/ui 基础组件
+│   ├── image-upload.tsx     # 图片上传组件
+│   ├── format-converter.tsx # 格式转换组件
+│   ├── image-compressor.tsx # 图片压缩组件
+│   ├── add-watermark.tsx    # 添加水印组件
+│   ├── remove-watermark.tsx # 去除水印组件
+│   ├── batch-processor.tsx  # 批量处理组件
+│   └── image-processing-ui.tsx # 水印相关 UI 组件
+├── lib/                     # 工具函数
+│   └── image-processing.ts  # 图片处理核心逻辑
+├── public/                  # 静态资源
+└── package.json
+```
+
+## 💻 开发指南
+
+### 添加新的图片处理功能
+
+1. 在 `lib/image-processing.ts` 中添加处理函数
+2. 在 `components/` 中创建对应的 UI 组件
+3. 在 `app/page.tsx` 中添加新的 Tab
+
+### 样式自定义
+
+项目使用 Tailwind CSS v4，主要样式配置在 `app/globals.css` 中：
+
+```css
+:root {
+  --primary: oklch(0.585 0.233 264.365);  /* VoidPix 品牌色 */
+  /* 其他颜色变量... */
+}
+```
+
+### 添加新的水印预设
+
+在 `components/add-watermark.tsx` 中修改 `PRESETS` 数组：
+
+```typescript
+const PRESETS: WatermarkPreset[] = [
+  // 添加你的预设
+  {
+    id: "custom",
+    name: "自定义",
+    description: "描述",
+    config: { /* 配置 */ }
+  }
+];
+```
+
+## 🏗️ 部署
+
+### Vercel 部署
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+一键部署到 Vercel：
+
+1. Fork 本项目
+2. 在 [Vercel](https://vercel.com/new) 导入项目
+3. 点击 Deploy
+
+### 其他平台
+
+本项目是标准的 Next.js 应用，可以部署到任何支持 Node.js 的平台：
+
+- Netlify
+- Cloudflare Pages
+- Railway
+- Render
+- 自建服务器
+
+## 🔒 隐私与安全
+
+VoidPix 承诺：
+
+- ✅ 所有图片处理均在浏览器本地完成
+- ✅ 不上传任何图片到服务器
+- ✅ 不收集用户数据
+- ✅ 不使用第三方追踪服务
+- ✅ 开源透明，代码可审计
+
+## 📄 开源协议
+
+本项目采用 [MIT License](LICENSE) 开源协议。
+
+## 🤝 贡献
+
+欢迎贡献代码、报告问题或提出建议！
+
+1. Fork 本项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 提交 Pull Request
+
+## 📮 联系方式
+
+- 项目主页：[https://github.com/your-username/voidpix](https://github.com/your-username/voidpix)
+- 问题反馈：[Issues](https://github.com/your-username/voidpix/issues)
+
+## ⭐ Star History
+
+如果这个项目对你有帮助，请给个 Star 支持！
+
+---
+
+<div align="center">
+
+Made with ❤️ by VoidPix Team
+
+[⬆ 返回顶部](#voidpix)
+
+</div>
