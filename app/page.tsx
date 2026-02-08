@@ -217,7 +217,7 @@ export default function Home() {
               </TabsContent>
 
               <TabsContent value="remove-watermark" className="mt-6">
-                <RemoveWatermark imageFile={imageFile} imagePreview={selectedImage} />
+                <RemoveWatermark imagePreview={selectedImage} />
               </TabsContent>
             </Tabs>
           </div>
