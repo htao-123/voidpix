@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="115" fill="url(#bg-gradient)"/>
+  <g transform="translate(128, 128)">
+    <!-- Sparkles/Stars icon -->
+    <path d="M128 0 C138 50 160 90 210 100 C160 110 138 150 128 200 C118 150 96 110 46 100 C96 90 118 50 128 0Z" fill="white"/>
+    <circle cx="200" cy="60" r="12" fill="white" opacity="0.8"/>
+    <circle cx="56" cy="140" r="8" fill="white" opacity="0.6"/>
+    <circle cx="180" cy="170" r="10" fill="white" opacity="0.7"/>
+  </g>
+  <text x="256" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" opacity="0.95">VP</text>
+</svg>

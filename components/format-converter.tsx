@@ -12,18 +12,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { compress, EImageType } from "image-conversion";
 
 interface FormatConverterProps {
   imageFile: File | null;
   imagePreview: string | null;
 }
 
-type ImageFormat = "png" | "jpeg" | "webp";
+type ImageFormat = "png" | "jpeg" | "webp" | "bmp" | "ico";
 
 const FORMAT_OPTIONS = [
-  { value: "png", label: "PNG", description: "无损压缩，适合透明背景" },
-  { value: "jpeg", label: "JPG", description: "有损压缩，文件更小" },
-  { value: "webp", label: "WEBP", description: "现代格式，体积更小" },
+  { value: "png", label: "PNG", description: "无损压缩，适合透明背景", mimeType: "image/png" },
+  { value: "jpeg", label: "JPG", description: "有损压缩，文件更小", mimeType: "image/jpeg" },
+  { value: "webp", label: "WEBP", description: "现代格式，体积更小", mimeType: "image/webp" },
+  { value: "bmp", label: "BMP", description: "位图格式，无压缩", mimeType: "image/bmp" },
+  { value: "ico", label: "ICO", description: "图标格式，用于网站favicon", mimeType: "image/x-icon" },
 ];
 
 export default function FormatConverter({ imageFile, imagePreview }: FormatConverterProps) {
@@ -34,42 +37,53 @@ export default function FormatConverter({ imageFile, imagePreview }: FormatConve
   const [convertedSize, setConvertedSize] = useState(0);
 
   const handleConvert = async () => {
-    if (!imagePreview) return;
+    if (!imageFile || !imagePreview) return;
 
     setIsConverting(true);
 
     try {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
+      const formatOption = FORMAT_OPTIONS.find(opt => opt.value === selectedFormat);
+      if (!formatOption) return;
 
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
+      // 对于 ICO 格式，使用特殊处理
+      if (selectedFormat === "ico") {
+        // 使用原生 Canvas 转换 ICO
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          // ICO 通常使用较小尺寸
+          const size = Math.min(img.width, img.height, 256);
+          canvas.width = size;
+          canvas.height = size;
 
-        // 填充白色背景（对于 JPG）
-        if (selectedFormat === "jpeg") {
-          ctx.fillStyle = "#FFFFFF";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
+          const ctx = canvas.getContext("2d");
+          if (!ctx) return;
 
-        ctx.drawImage(img, 0, 0);
+          ctx.drawImage(img, 0, 0, size, size);
 
-        const mimeType = `image/${selectedFormat === "jpeg" ? "jpeg" : selectedFormat}`;
-        const quality = selectedFormat === "png" ? 1 : 0.92;
-
-        canvas.toBlob((blob) => {
-          if (blob) {
-            const url = URL.createObjectURL(blob);
-            setConvertedUrl(url);
-            setOriginalSize(imageFile?.size || 0);
-            setConvertedSize(blob.size);
-          }
-          setIsConverting(false);
-        }, mimeType, quality);
-      };
-      img.src = imagePreview;
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const url = URL.createObjectURL(blob);
+              setConvertedUrl(url);
+              setOriginalSize(imageFile?.size || 0);
+              setConvertedSize(blob.size);
+            }
+            setIsConverting(false);
+          }, formatOption.mimeType);
+        };
+        img.src = imagePreview;
+      } else {
+        // 使用 image-conversion 库转换其他格式
+        const blob = await compress(imageFile, {
+          quality: 0.92,
+          type: formatOption.mimeType as EImageType,
+        });
+        const url = URL.createObjectURL(blob);
+        setConvertedUrl(url);
+        setOriginalSize(imageFile?.size || 0);
+        setConvertedSize(blob.size);
+        setIsConverting(false);
+      }
     } catch (error) {
       console.error("转换失败:", error);
       setIsConverting(false);
@@ -93,7 +107,7 @@ export default function FormatConverter({ imageFile, imagePreview }: FormatConve
       <CardHeader>
         <CardTitle>图片格式转换</CardTitle>
         <CardDescription>
-          将图片转换为 PNG、JPG 或 WEBP 格式
+          支持转换为 PNG、JPG、WEBP、BMP、ICO 等多种格式
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
