@@ -1,6 +1,5 @@
 # VoidPix
 
-<div align="center">
 
 **完全免费的在线图片处理工具**
 
